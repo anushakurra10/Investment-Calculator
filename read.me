@@ -1,0 +1,60 @@
+React Investment Calculator
+
+What the app does
+- This app helps users estimate how an investment grows over time.
+- It accepts four inputs:
+  - Initial Investment
+  - Annual Investment
+  - Expected Return (%)
+  - Duration (years)
+- It calculates the yearly investment value, the interest earned each year, the total interest, and the invested capital.
+- It shows the results in a table so users can see how their portfolio changes year by year.
+
+Technical details
+- Built with React and Vite.
+- Main app logic lives in src/App.jsx.
+- React hooks used:
+  - useState: manages the investmentData state object that stores the four user inputs.
+  - event handlers (plain JavaScript functions inside the component) are used to update state when a user changes any input field.
+- Each input field updates the investmentData object on change.
+- The app passes investmentData to the UserInput and InvestmentResults components.
+
+Key files
+- src/App.jsx
+  - Holds the investmentData state
+  - Updates the values whenever the user changes an input
+  - Renders the header, input form, and result table
+- src/components/UserInput.jsx
+  - Displays numeric input fields for all investment settings
+- src/components/InvestmentResults.jsx
+  - Calls the calculation utility
+  - Displays yearly results in a table format
+- src/util/investment.js
+  - Contains the calculation logic and currency formatting
+
+Calculation logic
+- The calculation starts with the initial investment amount.
+- For each year in the chosen duration:
+  - interestEarnedInYear = currentInvestmentValue * (expectedReturn / 100)
+  - newInvestmentValue = currentInvestmentValue + interestEarnedInYear + annualInvestment
+- Each year is stored as an object with:
+  - year
+  - interest
+  - valueEndOfYear
+  - annualInvestment
+
+Formatting
+- Currency display uses the browser Intl.NumberFormat API.
+- The app uses INR formatting with no decimal places:
+  - locale: 'en-US'
+  - currency: 'INR'
+  - minimumFractionDigits: 0
+  - maximumFractionDigits: 0
+
+How it runs
+- Install dependencies: npm install
+- Start the app: npm run dev
+- Build for production: npm run build
+
+Summary
+This is a small front-end financial calculator for projecting investment growth over time using simple yearly compounding logic and a React-based interface.
